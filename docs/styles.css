@@ -145,6 +145,7 @@ main{max-width:560px;margin:0 auto;padding:22px 16px 90px;display:flex;flex-dire
 .timeline{display:flex;flex-direction:column;gap:22px;position:relative}
 .timeline>.title{margin:18px 0 0;text-align:center}
 .event{padding-top:28px}
+.section-art{display:block;width:min(190px,56%);height:auto;margin:0 auto 10px}
 .venue-art{display:block;width:calc(100% + 28px);max-width:none;height:auto;margin:0 -14px 14px}
 .event-time{font-size:2.8rem;line-height:1;margin:10px auto 4px;font-variant-numeric:lining-nums tabular-nums}
 .arrival{display:inline-block;margin:10px auto 2px;padding:7px 16px;border-radius:999px;background:var(--field);border:1px solid #e6dcc4;font-size:.98rem;font-variant-numeric:lining-nums}
