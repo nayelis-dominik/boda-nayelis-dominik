@@ -11,5 +11,7 @@ window.WEDDING = {
   // Troceados para que los bots que buscan teléfonos en el código no los reconozcan.
   bridePhone: ['+34', '695', '80', '09', '03'].join(' '),
   groomPhone: ['+34', '625', '99', '34', '30'].join(' '),
+  // URL de la aplicación web de Google (apps-script/INSTRUCCIONES.md). Con ella las confirmaciones van a la hoja de los novios.
+  sheetUrl: '',
   formUrl: '' // Opcional: URL https de un formulario. Por defecto se prepara WhatsApp.
 };
