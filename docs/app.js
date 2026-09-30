@@ -67,15 +67,13 @@ const contacts = [['Nayelis', 'Novia', config.bridePhone], ['Dominik', 'Novio', 
 $('contacts').innerHTML = contacts.length ? contacts.map(([name, role, number]) => `<a class="wa" href="${escapeHtml(whatsapp(number, `Hola ${name}, te escribo por vuestra boda.`))}" target="_blank" rel="noopener noreferrer">${waIcon}<span><strong>${name}</strong><small>${role}</small></span></a>`).join('') : '<p class="notice">Pronto compartiremos los datos de contacto.</p>';
 $('reception-time').textContent = config.receptionTime;
 
-// Con sheetUrl las respuestas van a la hoja de Google de los novios; sin ella, se prepara un WhatsApp.
+// Las respuestas van a la hoja de Google de los novios (apps-script/INSTRUCCIONES.md).
 const sheetUrl = /^https:\/\/script\.google\.com\//.test(config.sheetUrl || '') ? config.sheetUrl : '';
-const formFooter = sheetUrl
-  ? '<label class="trap" aria-hidden="true">Web<input name="website" tabindex="-1" autocomplete="off"></label><button class="action" type="submit" id="rsvp-submit">Enviar confirmación</button>'
-  : '<label>¿A quién quieres enviárselo?<select name="recipient"><option value="bride">Nayelis</option><option value="groom">Dominik</option></select></label><p class="notice">Al pulsar el botón se preparará un mensaje con tus respuestas. Deberás enviarlo en WhatsApp para confirmar tu asistencia. No se guardan datos en esta web.</p><button class="action" type="submit">Preparar mi confirmación</button>';
-const rsvpFormMarkup = `<form id="rsvp-form"><label>Nombre y apellidos<input name="name" autocomplete="name" maxlength="120" placeholder="Tu nombre completo" required></label><fieldset class="q"><legend>¿Nos acompañarás en nuestro gran día?</legend><label class="opt"><input type="radio" name="attendance" value="Sí" required><span>¡Sí, no me lo perdería! ❤️</span></label><label class="opt"><input type="radio" name="attendance" value="No"><span>Lo siento, no podré asistir</span></label></fieldset><div id="guest-details"><fieldset class="q"><legend>¿Vendrás con tu pareja?</legend><p class="hint">Los acompañantes se limitan a parejas.</p><label class="opt"><input type="radio" name="partner" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="partner" value="No"><span>No</span></label><label class="follow" data-show="partner=Sí" hidden>Nombre de tu pareja<input name="partnerName" maxlength="120" required></label></fieldset><fieldset class="q"><legend>¿Tienes alguna alergia o intolerancia alimentaria?</legend><label class="opt"><input type="radio" name="allergy" value="No" required><span>No</span></label><label class="opt"><input type="radio" name="allergy" value="Sí"><span>Sí, indicar cuál</span></label><label class="follow" data-show="allergy=Sí" hidden>¿Cuál?<input name="allergyDetail" maxlength="300" required></label></fieldset><fieldset class="q"><legend>¿Necesitas un menú especial?</legend><label class="opt"><input type="radio" name="menu" value="No" required><span>No</span></label><label class="opt"><input type="radio" name="menu" value="Vegetariano"><span>Vegetariano</span></label><label class="opt"><input type="radio" name="menu" value="Vegano"><span>Vegano</span></label><label class="opt"><input type="radio" name="menu" value="Otro"><span>Otro</span></label><label class="follow" data-show="menu=Otro" hidden>¿Cuál?<input name="menuOther" maxlength="300" required></label></fieldset><fieldset class="q"><legend>¿Vendrás con niños?</legend><label class="opt"><input type="radio" name="kids" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="kids" value="No"><span>No</span></label><label class="follow" data-show="kids=Sí" hidden>¿Cuántos?<input name="kidsCount" type="number" min="1" max="10" value="1" required></label></fieldset><fieldset class="q"><legend>¿Necesitarás transporte hasta el lugar del banquete?</legend><label class="opt"><input type="radio" name="bus" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="bus" value="No"><span>No</span></label></fieldset><label>¿Qué canción no puede faltar en nuestra boda? 🎶<input name="song" maxlength="150" placeholder="Tu canción favorita"></label></div><label>¿Quieres dejarnos algún mensaje? 💌<textarea name="message" maxlength="600" placeholder="Un deseo, unas palabras bonitas..."></textarea></label>${formFooter}<div id="form-status" role="status"></div></form>`;
+const formFooter = '<label class="trap" aria-hidden="true">Web<input name="website" tabindex="-1" autocomplete="off"></label><button class="action" type="submit" id="rsvp-submit">Enviar confirmación</button>';
+const rsvpFormMarkup = `<form id="rsvp-form"><label>Nombre y apellidos<input name="name" autocomplete="name" maxlength="120" placeholder="Tu nombre completo" required></label><fieldset class="q"><legend>¿Nos acompañarás en nuestro gran día?</legend><label class="opt"><input type="radio" name="attendance" value="Sí" required><span>¡Sí, no me lo perdería! ❤️</span></label><label class="opt"><input type="radio" name="attendance" value="No"><span>Lo siento, no podré asistir</span></label></fieldset><div id="guest-details"><fieldset class="q"><legend>¿Vendrás con tu pareja?</legend><p class="hint">Los acompañantes se limitan a parejas.</p><label class="opt"><input type="radio" name="partner" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="partner" value="No"><span>No</span></label><label class="follow" data-show="partner=Sí" hidden>Nombre de tu pareja<input name="partnerName" maxlength="120" required></label></fieldset><fieldset class="q"><legend>¿Tienes alguna alergia o intolerancia alimentaria?</legend><label class="opt"><input type="radio" name="allergy" value="No" required><span>No</span></label><label class="opt"><input type="radio" name="allergy" value="Sí"><span>Sí, indicar cuál</span></label><label class="follow" data-show="allergy=Sí" hidden>¿Cuál?<input name="allergyDetail" maxlength="300" required></label></fieldset><fieldset class="q"><legend>¿Vendrás con niños?</legend><label class="opt"><input type="radio" name="kids" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="kids" value="No"><span>No</span></label><label class="follow" data-show="kids=Sí" hidden>¿Cuántos?<input name="kidsCount" type="number" min="1" max="10" value="1" required></label></fieldset><fieldset class="q"><legend>¿Necesitarás transporte hasta el lugar del banquete?</legend><label class="opt"><input type="radio" name="bus" value="Sí" required><span>Sí</span></label><label class="opt"><input type="radio" name="bus" value="No"><span>No</span></label></fieldset><label>¿Qué canción no puede faltar en nuestra boda? 🎶<input name="song" maxlength="150" placeholder="Tu canción favorita"></label></div>${formFooter}<div id="form-status" role="status"></div></form>`;
 const rsvpDialog = $('rsvp-dialog');
 if (config.formUrl && /^https:\/\//i.test(config.formUrl)) $('rsvp-content').innerHTML = externalLink(config.formUrl, 'Abrir formulario de asistencia');
-else if (!sheetUrl && (!config.bridePhone || !config.groomPhone)) $('rsvp-content').innerHTML = '<p class="notice">La confirmación de asistencia estará disponible próximamente.</p>';
+else if (!sheetUrl) $('rsvp-content').innerHTML = '<p class="notice">La confirmación de asistencia estará disponible próximamente.</p>';
 else {
   $('rsvp-content').innerHTML = '<button type="button" class="action" id="rsvp-open">Confirmar asistencia</button>';
   $('rsvp-dialog-content').innerHTML = rsvpFormMarkup;
@@ -100,7 +98,6 @@ if ($('rsvp-form')) {
   form.addEventListener('input', () => { status.replaceChildren(); });
   const button = $('rsvp-submit');
   async function sendToSheet(data) {
-    data.delete('recipient');
     button.disabled = true; button.textContent = 'Enviando…';
     try {
       const response = await fetch(sheetUrl, { method: 'POST', body: new URLSearchParams(data) });
@@ -117,19 +114,7 @@ if ($('rsvp-form')) {
     const data = new FormData(form); const get = field => String(data.get(field) ?? '').trim();
     const name = get('name');
     if (!name) { form.elements.name.setCustomValidity('Escribe tu nombre y apellidos.'); form.elements.name.reportValidity(); form.elements.name.addEventListener('input', () => form.elements.name.setCustomValidity(''), {once:true}); return; }
-    const coming = get('attendance') === 'Sí';
-    if (sheetUrl) { sendToSheet(data); return; }
-    const lines = ['Confirmación boda Nayelis & Dominik', `Nombre: ${name}`, `Asistencia: ${coming ? 'Sí' : 'No podré asistir'}`];
-    if (coming) lines.push(
-      `Pareja: ${get('partner') === 'Sí' ? `Sí (${get('partnerName')})` : 'No'}`,
-      `Alergias o intolerancias: ${get('allergy') === 'Sí' ? get('allergyDetail') : 'No'}`,
-      `Menú especial: ${get('menu') === 'Otro' ? `Otro: ${get('menuOther')}` : get('menu')}`,
-      `Niños: ${get('kids') === 'Sí' ? `Sí (${get('kidsCount')})` : 'No'}`,
-      `Transporte al banquete: ${get('bus')}`);
-    if (coming && get('song')) lines.push(`Canción: ${get('song')}`);
-    if (get('message')) lines.push(`Mensaje: ${get('message')}`);
-    const target = get('recipient') === 'groom' ? config.groomPhone : config.bridePhone;
-    status.innerHTML = '<p>Tu mensaje está preparado. Ábrelo y envíalo en WhatsApp para completar la confirmación.</p>' + externalLink(whatsapp(target, lines.join('\n')), 'Abrir WhatsApp y enviar');
+    sendToSheet(data);
   });
 }
 

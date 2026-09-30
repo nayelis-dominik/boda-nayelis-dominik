@@ -10,13 +10,10 @@ const COLUMNS = [
   ['Nombre de la pareja', 'partnerName'],
   ['Alergias o intolerancias', 'allergy'],
   ['¿Cuál?', 'allergyDetail'],
-  ['Menú especial', 'menu'],
-  ['Otro menú', 'menuOther'],
   ['Niños', 'kids'],
   ['Nº de niños', 'kidsCount'],
   ['Transporte al banquete', 'bus'],
   ['Canción', 'song'],
-  ['Mensaje', 'message'],
 ];
 
 function doPost(e) {
