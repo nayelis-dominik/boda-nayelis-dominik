@@ -61,7 +61,7 @@ countdown(); setInterval(countdown, 1000);
 
 $('ceremony-time').textContent = config.arrivalTime || config.ceremonyTime;
 $('ceremony-note').hidden = !config.ceremonyProvisional;
-if (config.arrivalTime) { $('start-time').textContent = config.ceremonyTime; $('arrival-label').hidden = false; $('ceremony-start').hidden = false; }
+$('arrival-label').hidden = !config.arrivalTime;
 const waIcon = '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.3 20.7l4.4-1.1A8.8 8.8 0 1 0 12 3.2z"/><path d="M9 8.3c.3-.6.7-.6 1-.6.3 0 .5.4.8 1 .2.5.1.8-.1 1.1l-.5.6c.6 1.2 1.6 2.2 2.8 2.8l.6-.5c.3-.2.6-.3 1.1-.1.6.3 1 .5 1 .8 0 .3 0 .7-.5.9-.8.5-1.8.5-3-.1a8 8 0 0 1-3.2-3.2c-.6-1.2-.6-2.1 0-2.7z"/></svg>';
 const contacts = [['Nayelis', 'Novia', config.bridePhone], ['Dominik', 'Novio', config.groomPhone]].filter(([, , number]) => number);
 $('contacts').innerHTML = contacts.length ? contacts.map(([name, role, number]) => `<a class="wa" href="${escapeHtml(whatsapp(number, `Hola ${name}, te escribo por vuestra boda.`))}" target="_blank" rel="noopener noreferrer">${waIcon}<span><strong>${name}</strong><small>${role}</small></span></a>`).join('') : '<p class="notice">Pronto compartiremos los datos de contacto.</p>';
