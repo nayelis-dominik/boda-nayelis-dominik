@@ -12,6 +12,6 @@ window.WEDDING = {
   bridePhone: ['+34', '695', '80', '09', '03'].join(' '),
   groomPhone: ['+34', '625', '99', '34', '30'].join(' '),
   // URL de la aplicación web de Google (apps-script/INSTRUCCIONES.md). Sin ella, el formulario aparece como «próximamente».
-  sheetUrl: '',
+  sheetUrl: 'https://script.google.com/macros/s/AKfycbz6tar3lnPGa19Y0lJLLQ_VPHTFDf01dyAO87LHmRtQEi2TjY0YbUySTQoONSL5igHc5g/exec',
   formUrl: '' // Opcional: URL https de un formulario externo en lugar del propio.
 };
