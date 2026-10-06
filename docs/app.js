@@ -83,7 +83,7 @@ else {
   rsvpDialog.addEventListener('close', () => { root.classList.remove('sheet-open'); $('rsvp-open').focus(); });
 }
 $('gift-content').innerHTML = config.iban ? `<p class="iban">${escapeHtml(config.iban)}</p><button class="action" id="copy-iban">Copiar número de cuenta</button><p role="status" id="copy-status" class="small"></p>` : '<p class="notice">Pronto compartiremos el número de cuenta. Si lo necesitas, puedes contactar con nosotros.</p>';
-if ($('copy-iban')) $('copy-iban').addEventListener('click', async () => { try { await navigator.clipboard.writeText(config.iban); $('copy-status').textContent='Número de cuenta copiado.'; } catch { $('copy-status').textContent='No se pudo copiar. Selecciona el número de cuenta y cópialo manualmente.'; } });
+if ($('copy-iban')) $('copy-iban').addEventListener('click', async () => { try { await navigator.clipboard.writeText(config.iban.replace(/\s/g, '')); $('copy-status').textContent='Número de cuenta copiado.'; } catch { $('copy-status').textContent='No se pudo copiar. Selecciona el número de cuenta y cópialo manualmente.'; } });
 if ($('rsvp-form')) {
   const form = $('rsvp-form'); const status = $('form-status');
   const toggle = (el, on) => { el.hidden = !on; el.querySelectorAll('input,textarea,select').forEach(input => { input.disabled = !on; }); };
