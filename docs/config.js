@@ -7,7 +7,7 @@ window.WEDDING = {
   receptionTime: '19:00',
   photo: '', // Ejemplo: 'assets/pareja.jpg'. Sin foto se muestra el monograma.
   music: '', // Ejemplo: 'assets/cancion.mp3'. Añade un audio que puedas utilizar.
-  iban: 'ES83 1583 0001 1891 0476 6328',
+  iban: 'ES8315830001189104766328',
   // Troceados para que los bots que buscan teléfonos en el código no los reconozcan.
   bridePhone: ['+34', '695', '80', '09', '03'].join(' '),
   groomPhone: ['+34', '625', '99', '34', '30'].join(' '),
